@@ -1,0 +1,51 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <script type='module'> 
+      import {OctopusTable} from './octopus_table.js'
+      window.onload = ()=> {
+      const table = new OctopusTable()
+      const newTable = document.createElement('table')
+      table.fromJson(
+        [[{ "content": "Name", classList: ['header'] }, { "content": "Email", classList: ['header'] }],
+        [{ "content": "Jon" }, { "content": "kulcas@gmail.com" }],
+        [{ "content": "Forn" }, { "content": "capic@gmail.com" }]],
+        newTable)
+        table.mount(document.querySelector('#app'), newTable)
+        
+        for (let x of ["ac", "acb", "ar", "arb", "gs", "rr", "rc", "m", "s", 'tj'])
+        document.querySelector(`.${x}`).addEventListener("click", (e) => {
+          if (x == "ac") return table.addColumn();
+          if (x == "acb") return table.addColumnBefore();
+          if (x == "ar") return table.addRow();
+          if (x == "arb") return table.addRowBefore();
+          if (x == "rr") return table.removeRow();
+          if (x == "rc") return table.removeColumn();
+          if (x == "m") return table.merge();
+          if (x == "s") return table.split();
+          if (x == "tj") return table.toJson();
+        });
+      }
+      </script>
+    <title>Octopus Table</title>
+  </head>
+  <body>
+    <h1>Octopus Table</h1>
+    <button class="ac">Add Column</button>
+    <button class="acb">Add Column Before</button>
+    <button class="ar">Add Row</button>
+    <button class="arb">Add Row Before</button>
+    <button class="gs">getSelection</button>
+    <button class="rr">remove row</button>
+    <button class="rc">remove column</button>
+    <button class="m">Merge</button>
+    <button class="s">Split</button>
+    <button class="tj">getJson</button>
+    <div>
+      <table id="app">
+    </div>
+  </body>
+</html>
